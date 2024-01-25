@@ -1,2 +1,2 @@
-# Finanacial-Juice-Crawler
+# Financial-Juice-Crawler
 Crawl oil price trot
