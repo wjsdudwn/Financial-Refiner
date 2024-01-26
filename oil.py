@@ -16,6 +16,7 @@ def oil_crawler():
     driver = webdriver.Chrome() #executable_path = ''
     driver.implicitly_wait(10)
     driver.get("https://www.financialjuice.com/home") #사이트 접속
+    driver.maximize_window()
     signin_li = driver.find_element(By.ID, 'liSignIn') # Sign in 버튼을 포함하는 li 태그 찾기
     signin_a = signin_li.find_element(By.TAG_NAME, "a") # li 태그 안에 있는 a 태그 선택
     signin_a.click() # 클릭해서 로그인 창으로 이동
@@ -29,7 +30,14 @@ def oil_crawler():
     login_button = driver.find_element(By.ID, "ctl00_SignInSignUp_loginForm1_btnLogin") #버튼인데 input 태그로 되어 있음
     login_button.click()
     time.sleep(random_time())
-    headline_elements_p = driver.find_elements(By.CLASS_NAME, 'p.headline-title')
+    headline_div = driver.find_element(By.CSS_SELECTOR, "col-xs-12 col-sm-12 col-md-12 col-lg-12")
+    headline_p = headline_div.find_element(By.TAG_NAME, "p")
+    headline_a = headline_p.find_element(By.TAG_NAME, 'a')
+    headline_text = headline_a.text
+    return headline_text
+
+
+    headline_elements_p = driver.find_elements(By.CLASS_NAME, 'p.headline-title') #여기서 결괏값이 안나옴!!!
     headline_elements_a = []
     for element in headline_elements_p:
         headline_element_a = element.find_element(By.TAG_NAME, "a")
