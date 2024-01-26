@@ -22,8 +22,7 @@ def oil_crawler(driver):
     
     # click login button
     li = driver.find_element(By.ID, 'liSignIn') # Sign in 버튼을 포함하는 li 태그 찾기
-    a = li.find_element(By.TAG_NAME, "a") # li 태그 안에 있는 a 태그 선택
-    a.click() # 클릭해서 로그인 창으로 이동
+    li.find_element(By.TAG_NAME, "a").click() # li 태그 안에 있는 a 태그 선택
     # input userID & PWD
     inputEmail = driver.find_element(By.ID, "ctl00_SignInSignUp_loginForm1_inputEmail")
     time.sleep(random_time())
@@ -37,9 +36,15 @@ def oil_crawler(driver):
     time.sleep(random_time())
     
     # crawling
-    # headline_dziv = driver.find_element(By.CSS_SELECTOR, "col-xs-12 col-sm-12 col-md-12 col-lg-12") # none 
-    headlineTitle = driver.find_elements(By.CLASS_NAME, "headline-title-nolink")
+    # enter commodities
+    
+
+    headlineTitle = driver.find_elements(By.CLASS_NAME, "headline-title")
+    # headlineTitle2 = driver.find_elements(By.CLASS_NAME, "")
     result = []
+
     for e in headlineTitle:
         result.append(e.text)
+    # for e in headlineTitle2:
+    #     result.append(e.text)
     return result
