@@ -38,7 +38,7 @@ def oil_crawler(driver):
     
     # crawling
     # headline_dziv = driver.find_element(By.CSS_SELECTOR, "col-xs-12 col-sm-12 col-md-12 col-lg-12") # none 
-    headlineTitle = driver.find_elements(By.CLASS_NAME, "headline-text")
+    headlineTitle = driver.find_elements(By.CLASS_NAME, "headline-title-nolink")
     result = []
     for e in headlineTitle:
         result.append(e.text)
