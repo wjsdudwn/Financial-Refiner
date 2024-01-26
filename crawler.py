@@ -6,11 +6,11 @@ from oil import oil_crawler
 class Crawler():
     def __init__(self) -> None:
         self.driver = webdriver.Chrome()
-        
-
+    
     def oil(self) -> list:
         return oil_crawler(self.driver)
     
 
 result = Crawler().oil()
-print(result)
+for x in result:
+    print(x)
