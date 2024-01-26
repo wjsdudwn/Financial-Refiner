@@ -8,6 +8,7 @@ class Crawler():
         self.driver = webdriver.Chrome()
     
     def oil(self) -> list:
+
         return oil_crawler(self.driver)
     
 

@@ -19,27 +19,43 @@ def oil_crawler(driver) -> list:
     driver.get("https://www.financialjuice.com/home") #사이트 접속
     driver.maximize_window()
     
-    # click login button
-    li = driver.find_element(By.ID, 'liSignIn') # Sign in 버튼을 포함하는 li 태그 찾기
-    li.find_element(By.TAG_NAME, "a").click() # li 태그 안에 있는 a 태그 선택
+    # click sign in button
+    li = driver.find_element(By.ID, 'liSignIn')
+    li.find_element(By.TAG_NAME, "a").click() 
     # input userID & PWD
     inputEmail = driver.find_element(By.ID, "ctl00_SignInSignUp_loginForm1_inputEmail")
     time.sleep(random_time())
+
     inputPWD = driver.find_element(By.ID, "ctl00_SignInSignUp_loginForm1_inputPassword")
     time.sleep(random_time())
+
     inputEmail.send_keys("jhnamugeona@gmail.com")
     inputPWD.send_keys("sangmoon123")
     time.sleep(random_time())
-    loginButton = driver.find_element(By.ID, "ctl00_SignInSignUp_loginForm1_btnLogin") #버튼인데 input 태그로 되어 있음
+
+    # finish login
+    loginButton = driver.find_element(By.ID, "ctl00_SignInSignUp_loginForm1_btnLogin") # find by id
     loginButton.click()
     time.sleep(random_time())
     
     # move to Commodities tab
     # no class at commodities button -> use xpath
-    headlineTitle = driver.find_elements(By.CLASS_NAME, "headline-title")
+    temp = driver.find_element(By.XPATH, 
+        "//*[@id=\"aspnetForm\"]/div[3]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div/div/div[1]/ul/li[4]/a"
+        )
+    temp.click()
+    
+    # get Tag & title
+    headline = driver.find_elements(By.CLASS_NAME, "headline-item") # webElement object(include tag, title...) in list
+    # ===================  
+    # <class name guide>
+    # tag & time => drag-up
+    # title => headline-title
+    # ===================
     result = []
-    for e in headlineTitle:
-        result.append(e.text)
-    # for e in headlineTitle2:
-    #     result.append(e.text)
+    for x in headline:
+        tag = x.find_element(By.CLASS_NAME, "drag-up").text
+        if "Energy" in tag:
+            result.append(x.find_element(By.CLASS_NAME, "headline-title").text)
     return result
+    
