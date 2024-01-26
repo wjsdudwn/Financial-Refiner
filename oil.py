@@ -4,9 +4,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
 import random
-def random_time():
+def random_time() -> float:
     return random.uniform(0.5, 1)
-def oil_crawler(driver):
+def oil_crawler(driver) -> list:
     # user setting
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -14,7 +14,6 @@ def oil_crawler(driver):
     options = Options()
     options.add_experimental_option("detatch", True)
     options.add_argument("--disable-blink-features=AutomationControlled") #강제로 자동화 브라우저가 아님을 말함
-    driver = webdriver.Chrome() #executable_path = ''
     driver.implicitly_wait(10)
 
     driver.get("https://www.financialjuice.com/home") #사이트 접속
@@ -35,14 +34,10 @@ def oil_crawler(driver):
     loginButton.click()
     time.sleep(random_time())
     
-    # crawling
-    # enter commodities
-    
-
+    # move to Commodities tab
+    # no class at commodities button -> use xpath
     headlineTitle = driver.find_elements(By.CLASS_NAME, "headline-title")
-    # headlineTitle2 = driver.find_elements(By.CLASS_NAME, "")
     result = []
-
     for e in headlineTitle:
         result.append(e.text)
     # for e in headlineTitle2:
