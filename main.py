@@ -13,14 +13,14 @@ while True:
         
         if prev == cur: # if no change > continue
             print("no change")
-            asyncio.run(bot.send_message(chat_id = "-1002139751230", text="No change for now"))
+            #asyncio.run(bot.send_message(chat_id = "-1002139751230", text="No change for now"))
             time.sleep(30)
             continue
         # if changed
         # =========================== telegram code
         for title in cur:
             if title not in prev:
-                asyncio.run(bot.send_message(chat_id = "-1002139751230", text="Changed!!"))
+                asyncio.run(bot.send_message(chat_id = "-1002139751230", text=title))
                 print("sent a message")
         # ===========================
         prev = cur.copy()
