@@ -6,14 +6,11 @@ import time
 import random
 def random_time() -> float:
     return random.uniform(0.5, 1)
-def oil_crawler(driver) -> list:
+def oil_crawler(driver, searchTerm) -> list:
     # user setting
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
-    options = Options()
-    options.add_experimental_option("detatch", True)
-    options.add_argument("--disable-blink-features=AutomationControlled") #강제로 자동화 브라우저가 아님을 말함
     driver.implicitly_wait(10)
 
     driver.get("https://www.financialjuice.com/home") #사이트 접속
@@ -22,6 +19,7 @@ def oil_crawler(driver) -> list:
     # click sign in button
     li = driver.find_element(By.ID, 'liSignIn')
     li.find_element(By.TAG_NAME, "a").click() 
+
     # input userID & PWD
     inputEmail = driver.find_element(By.ID, "ctl00_SignInSignUp_loginForm1_inputEmail")
     time.sleep(random_time())
@@ -55,7 +53,7 @@ def oil_crawler(driver) -> list:
     result = []
     for x in headline:
         tag = x.find_element(By.CLASS_NAME, "drag-up").text
-        if "Energy" in tag:
+        if searchTerm in tag:
             result.append(x.find_element(By.CLASS_NAME, "headline-title").text)
     return result
     
