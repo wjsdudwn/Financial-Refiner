@@ -10,7 +10,4 @@ class Crawler():
     def oil(self) -> list:
         return oil_crawler(self.driver, "Oil")
     
-
-result = Crawler().oil()
-for x in result:
-    print(x)
+print(Crawler().oil())

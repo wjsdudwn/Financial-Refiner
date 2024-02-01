@@ -14,7 +14,7 @@ def oil_crawler(driver, searchTerm) -> list:
     driver.implicitly_wait(10)
 
     driver.get("https://www.financialjuice.com/home") #사이트 접속
-    driver.maximize_window()
+    # driver.maximize_window()
     
     # click sign in button
     li = driver.find_element(By.ID, 'liSignIn')
