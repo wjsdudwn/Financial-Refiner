@@ -12,9 +12,9 @@ def oil_crawler(driver, searchTerm) -> list:
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
     driver.implicitly_wait(10)
-
+    
     driver.get("https://www.financialjuice.com/home") #사이트 접속
-    # driver.maximize_window()
+    
     
     # click sign in button
     li = driver.find_element(By.ID, 'liSignIn')
