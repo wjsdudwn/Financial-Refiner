@@ -1,6 +1,7 @@
 from crawler import Crawler
 import time
 import telegram
+import asyncio
 
 prev = []  # list current news
 cur = [] # list before 10sec news
@@ -11,19 +12,19 @@ while True:
         cur = Crawler().oil() # save current news
         
         if prev == cur: # if no change > continue
-            time.sleep(10)
             print("no change")
-            bot.send_message(chat_id = "-1002139751230", text="dd")
+            asyncio.run(bot.send_message(chat_id = "-1002139751230", text="No change for now"))
+            time.sleep(30)
             continue
         # if changed
         # =========================== telegram code
         for title in cur:
             if title not in prev:
-                bot.send_message(chat_id = "-1002139751230", text="dd")
+                asyncio.run(bot.send_message(chat_id = "-1002139751230", text="Changed!!"))
                 print("sent a message")
         # ===========================
         prev = cur.copy()
-        time.sleep(10)
+        time.sleep(30)
     except Exception as e:
-        time.sleep(3)
+        time.sleep(30)
         continue
